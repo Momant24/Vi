@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="styling.css">
+<link rel="stylesheet" href="styling.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,14 +13,33 @@
             <a href="paul.html">Paul</a>
         </div>
     </div>
+    <br><br><br><br><br><br>
     <h1>Velkommen til Den Morsomme Nettsiden!</h1>
     <button id="fargeEndreKnapp">Endre Bakgrunnsfarge</button>
     <button id="tekstEndreKnapp">Endre Tekst</button>
     <button id="spillKnapp">Start Spill</button>
+    <button id="visMemorySpillKnapp">Vis Memory Spill</button>
+    <button id="visGjetteSpillKnapp">Vis Gjette Spill</button>
+    
+
     <div id="spillContainer" style="display:none;">
         <p>Trykk på rød knapp for poeng!</p>
         <button id="poengKnapp" style="background-color: red;">Trykk her!</button>
         <p>Poeng: <span id="poeng">0</span></p>
+    </div>
+
+
+    <div id="memorySpillContainer" style="display:none;">
+        <button id="startMemorySpill">Start Memory Spill</button>
+        <div id="memorySpillBrett"></div>
+    </div>
+    
+    <div id="gjetteSpillContainer" style="display:none;">
+        <p>Gjett et tall mellom 1 og 10</p>
+        <input type="number" id="gjettInput">
+        <button id="gjettKnapp">Gjett</button>
+        <p id="gjetteResultat"></p>
+    </div>
     
     <script src="Java.js"></script>
 </body>
