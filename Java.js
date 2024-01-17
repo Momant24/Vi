@@ -236,3 +236,114 @@ function gjettBokstav(bokstav) {
         document.getElementById("gjetteOrdResultat").textContent = "Feil, prøv igjen.";
     }
 }
+document.getElementById("visOrdPuslespillKnapp").addEventListener("click", function() {
+    document.getElementById("ordPuslespillContainer").style.display = "block";
+    startOrdPuslespill();
+});
+
+const ordListe = ["apple", "banana", "cherry", "grape", "orange", "strawberry", "watermelon"];
+
+function startOrdPuslespill() {
+    const puslespillRute = document.getElementById("puslespillRute");
+    puslespillRute.innerHTML = "";
+
+    // Velg et tilfeldig ord fra listen
+    const tilfeldigOrd = ordListe[Math.floor(Math.random() * ordListe.length)];
+
+    // Del ordet opp i bokstaver
+    const bokstaver = tilfeldigOrd.split("");
+
+    // Lag en rute for hvert brev i ordet
+    for (const bokstav of bokstaver) {
+        const rute = document.createElement("div");
+        rute.classList.add("puslespillRute");
+        rute.textContent = bokstav;
+        puslespillRute.appendChild(rute);
+    }
+}
+
+document.getElementById("nyttPuslespillKnapp").addEventListener("click", startOrdPuslespill);
+document.getElementById("visKryssordKnapp").addEventListener("click", function() {
+    document.getElementById("kryssordSpillContainer").style.display = "block";
+    startKryssordSpill();
+});
+
+const kryssordData = {
+    dimensjoner: { rader: 8, kolonner: 8 },
+    ord: [
+        { retning: "vannrett", rad: 0, kolonne: 0, svar: "elefant", hint: "Stor dyreart" },
+        { retning: "vannrett", rad: 2, kolonne: 3, svar: "sjokolade", hint: "Søt godbit" },
+        { retning: "vannrett", rad: 4, kolonne: 2, svar: "sykkel", hint: "Tohjulig kjøretøy" },
+        { retning: "vannrett", rad: 6, kolonne: 0, svar: "fotball", hint: "Lagsport" },
+        { retning: "lodrett", rad: 0, kolonne: 2, svar: "blomst", hint: "Naturens skjønnhet" },
+        { retning: "lodrett", rad: 0, kolonne: 5, svar: "bokstav", hint: "Den minste enheten i språket" },
+        { retning: "lodrett", rad: 3, kolonne: 7, svar: "musikk", hint: "Lyd i harmoni" },
+        { retning: "lodrett", rad: 5, kolonne: 4, svar: "regnbue", hint: "Syv farger på himmelen" }
+    ]
+};
+
+function startKryssordSpill() {
+    const kryssordBrett = document.getElementById("kryssordBrett");
+    kryssordBrett.innerHTML = "";
+
+    for (let rad = 0; rad < kryssordData.dimensjoner.rader; rad++) {
+        const radDiv = document.createElement("div");
+        radDiv.classList.add("kryssordRad");
+
+        for (let kolonne = 0; kolonne < kryssordData.dimensjoner.kolonner; kolonne++) {
+            const kolonneDiv = document.createElement("div");
+            kolonneDiv.classList.add("kryssordKolonne");
+
+            // Finn ut om dette ruten skal ha en celle eller ikke
+            const celle = kryssordData.ord.find(ordInfo => (
+                (ordInfo.retning === "vannrett" && ordInfo.rad === rad && kolonne >= ordInfo.kolonne && kolonne < ordInfo.kolonne + ordInfo.svar.length) ||
+                (ordInfo.retning === "lodrett" && kolonne === ordInfo.kolonne && rad >= ordInfo.rad && rad < ordInfo.rad + ordInfo.svar.length)
+            ));
+
+            if (celle) {
+                kolonneDiv.classList.add("kryssordCelle");
+                kolonneDiv.dataset.ordIndex = kryssordData.ord.indexOf(celle);
+                kolonneDiv.dataset.ordRetning = celle.retning;
+                kolonneDiv.dataset.ordLengde = celle.svar.length;
+            }
+
+            radDiv.appendChild(kolonneDiv);
+        }
+
+        kryssordBrett.appendChild(radDiv);
+    }
+
+    // Legg til hintene
+    const hintDiv = document.createElement("div");
+    hintDiv.id = "kryssordHint";
+    kryssordData.ord.forEach(ordInfo => {
+        const hint = document.createElement("p");
+        hint.textContent = `${ordInfo.retning}: ${ordInfo.hint} (${ordInfo.svar.length} bokstaver)`;
+        hintDiv.appendChild(hint);
+    });
+
+    kryssordSpillLyttere();
+    kryssordBrett.appendChild(hintDiv);
+}
+
+function kryssordSpillLyttere() {
+    const kryssordCeller = document.querySelectorAll(".kryssordCelle");
+    kryssordCeller.forEach(celle => {
+        celle.addEventListener("click", () => {
+            const ordIndex = parseInt(celle.dataset.ordIndex);
+            const ordRetning = celle.dataset.ordRetning;
+            const ordLengde = parseInt(celle.dataset.ordLengde);
+
+            const svar = prompt(`Skriv inn ${ordLengde} bokstaver for ordet: ${kryssordData.ord[ordIndex].hint}`);
+            if (svar) {
+                const riktigSvar = kryssordData.ord[ordIndex].svar.toLowerCase();
+                if (svar.toLowerCase() === riktigSvar) {
+                    // Riktig svar
+                    celle.classList.add("kryssordRiktigSvar");
+                    celle.textContent = riktigSvar;
+                    celle.removeEventListener("click", null);
+                }
+            }
+        });
+    });
+}
