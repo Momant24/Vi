@@ -22,15 +22,30 @@
     <button id="visGjetteSpillKnapp">Vis Gjette Spill</button>
     <button id="visHigherLowerSpillKnapp">Vis Higher or Lower Spill</button>
     <button id="visRockPaperScissorsKnapp">Vis Stein, Saks, Papir</button>
+    <button id="visQuizSpillKnapp">Vis Quiz Spill</button>
+    <button id="visGjetteOrdSpillKnapp">Vis Gjette Ord Spill</button>
    
-   
+    <div id="gjetteOrdSpillContainer" style="display:none;">
+        <p>Gjett ordet: <span id="ordDisplay"></span></p>
+        <input type="text" id="bokstavInput" placeholder="Skriv en bokstav" maxlength="1">
+        <button id="gjettBokstavKnapp">Gjett</button>
+        <p id="gjetteOrdResultat"></p>
+    </div>
+    
     <div id="rockPaperScissorsContainer" style="display:none;">
         <button id="rockButton">Stein</button>
         <button id="paperButton">Papir</button>
         <button id="scissorsButton">Saks</button>
         <p id="rockPaperScissorsResultat"></p>
     </div>
-   
+    <div id="quizSpillContainer" style="display:none;">
+        <p id="quizSporsmaal"></p>
+        <button id="svar1">Svar 1</button>
+        <button id="svar2">Svar 2</button>
+        <button id="svar3">Svar 3</button>
+        <p id="quizResultat"></p>
+    </div>
+    
     
     
 

@@ -155,3 +155,84 @@ function spilleRockPaperScissors(spillerValg) {
         document.getElementById("rockPaperScissorsResultat").textContent = "Du taper! " + datamaskinValg + " slår " + spillerValg;
     }
 }
+document.getElementById("visQuizSpillKnapp").addEventListener("click", function() {
+    document.getElementById("quizSpillContainer").style.display = "block";
+    visQuizSporsmaal();
+});
+
+let quizSporsmaalOgSvar = {
+    sporsmaal: "Hva er hovedstaden i Norge?",
+    svar: ["Oslo", "Bergen", "Trondheim"],
+    korrektSvar: "Oslo"
+};
+
+function visQuizSporsmaal() {
+    document.getElementById("quizSporsmaal").textContent = quizSporsmaalOgSvar.sporsmaal;
+    document.getElementById("svar1").textContent = quizSporsmaalOgSvar.svar[0];
+    document.getElementById("svar2").textContent = quizSporsmaalOgSvar.svar[1];
+    document.getElementById("svar3").textContent = quizSporsmaalOgSvar.svar[2];
+}
+
+document.getElementById("svar1").addEventListener("click", function() {
+    sjekkSvar(quizSporsmaalOgSvar.svar[0]);
+});
+document.getElementById("svar2").addEventListener("click", function() {
+    sjekkSvar(quizSporsmaalOgSvar.svar[1]);
+});
+document.getElementById("svar3").addEventListener("click", function() {
+    sjekkSvar(quizSporsmaalOgSvar.svar[2]);
+});
+
+function sjekkSvar(valgtSvar) {
+    if (valgtSvar === quizSporsmaalOgSvar.korrektSvar) {
+        document.getElementById("quizResultat").textContent = "Riktig!";
+    } else {
+        document.getElementById("quizResultat").textContent = "Feil. Riktig svar er " + quizSporsmaalOgSvar.korrektSvar;
+    }
+}
+document.getElementById("visGjetteOrdSpillKnapp").addEventListener("click", function() {
+    document.getElementById("gjetteOrdSpillContainer").style.display = "block";
+    startGjetteOrdSpill();
+});
+
+let valgtOrd;
+let visningsOrd;
+
+function startGjetteOrdSpill() {
+    const ordListe = ["apple", "banana", "orange"];
+    valgtOrd = ordListe[Math.floor(Math.random() * ordListe.length)];
+    visningsOrd = "_".repeat(valgtOrd.length);
+    document.getElementById("ordDisplay").textContent = visningsOrd;
+    document.getElementById("gjetteOrdResultat").textContent = "";
+}
+
+document.getElementById("gjettBokstavKnapp").addEventListener("click", function() {
+    const bokstav = document.getElementById("bokstavInput").value.toLowerCase();
+    if (bokstav && bokstav.length === 1) {
+        gjettBokstav(bokstav);
+    }
+    document.getElementById("bokstavInput").value = ""; // Tømmer input-feltet
+});
+
+function gjettBokstav(bokstav) {
+    let oppdatertVisning = "";
+    let riktigGjettet = false;
+
+    for (let i = 0; i < valgtOrd.length; i++) {
+        if (valgtOrd[i] === bokstav) {
+            oppdatertVisning += bokstav;
+            riktigGjettet = true;
+        } else {
+            oppdatertVisning += visningsOrd[i];
+        }
+    }
+
+    visningsOrd = oppdatertVisning;
+    document.getElementById("ordDisplay").textContent = visningsOrd;
+
+    if (!visningsOrd.includes("_")) {
+        document.getElementById("gjetteOrdResultat").textContent = "Gratulerer! Du gjettet ordet!";
+    } else if (!riktigGjettet) {
+        document.getElementById("gjetteOrdResultat").textContent = "Feil, prøv igjen.";
+    }
+}
