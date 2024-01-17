@@ -48,6 +48,18 @@ body {
     z-index: 9999;
 }
 
+.paul_background {
+    background-color: black;
+}
+
+
+.title {
+    color: #4D77FE;
+}
+
+#message {
+    color: white;
+}
 
 .paul {
     font-size: 200px;
