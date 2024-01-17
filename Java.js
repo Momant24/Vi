@@ -347,3 +347,92 @@ function kryssordSpillLyttere() {
         });
     });
 }
+document.getElementById("visTallGjetningKnapp").addEventListener("click", function() {
+    document.getElementById("tallGjetningSpillContainer").style.display = "block";
+    startTallGjetningSpill();
+});
+
+let riktigTall;
+
+function startTallGjetningSpill() {
+    genererNyttRiktigTall(); // Legg til denne linjen for å generere et nytt riktig tall ved oppstart
+    document.getElementById("tallGjetningResultat").textContent = "";
+    
+    document.getElementById("sjekkTallKnapp").addEventListener("click", sjekkTallGjetning);
+}
+
+function genererNyttRiktigTall() {
+    riktigTall = Math.floor(Math.random() * 100) + 1;
+}
+
+function sjekkTallGjetning() {
+    const brukerTall = parseInt(document.getElementById("tallInput").value);
+    
+    if (isNaN(brukerTall)) {
+        document.getElementById("tallGjetningResultat").textContent = "Skriv inn et gyldig tall.";
+    } else {
+        if (brukerTall === riktigTall) {
+            document.getElementById("tallGjetningResultat").textContent = "Gratulerer! Du gjettet riktig tall.";
+            genererNyttRiktigTall(); // Legg til denne linjen for å generere et nytt riktig tall etter riktig gjetning
+        } else if (brukerTall < riktigTall) {
+            document.getElementById("tallGjetningResultat").textContent = "Tallet er større. Prøv igjen.";
+        } else {
+            document.getElementById("tallGjetningResultat").textContent = "Tallet er mindre. Prøv igjen.";
+        }
+    }
+}
+let antallKlikk = 0;
+
+document.addEventListener("DOMContentLoaded", () => {
+    const mål = document.getElementById("mål");
+    const antallKlikkElement = document.getElementById("antallKlikk");
+
+    mål.addEventListener("click", () => {
+        antallKlikk++;
+        antallKlikkElement.textContent = antallKlikk;
+
+        flyttMål();
+    });
+});
+
+function flyttMål() {
+    const brett = document.getElementById("spillBrett");
+    const mål = document.getElementById("mål");
+
+    const maxX = brett.clientWidth - mål.clientWidth;
+    const maxY = brett.clientHeight - mål.clientHeight;
+
+    const nyX = Math.floor(Math.random() * maxX);
+    const nyY = Math.floor(Math.random() * maxY);
+
+    mål.style.left = nyX + "px";
+    mål.style.top = nyY + "px";
+}
+// Liste over mulige bilder
+const bilder = [
+    'bilder/Jacob.png',
+    'bilder/Trump.jpg',
+    'bilder/Tux.png',
+    // Legg til flere bilder her
+];
+
+// Velg et tilfeldig bilde fra listen
+const tilfeldigBilde = bilder[Math.floor(Math.random() * bilder.length)];
+
+// Sett bildet som kilde for img-elementet
+document.getElementById('skjultBilde').src = tilfeldigBilde;
+
+document.getElementById('visGjettDetSkjulteBildeKnapp').addEventListener('click', function() {
+    document.getElementById('gjettDetSkjulteBildeContainer').style.display = 'block';
+});
+
+document.getElementById('sjekkGjettKnapp').addEventListener('click', function() {
+    const brukerSvar = document.getElementById('gjettInput').value.toLowerCase();
+    const riktigSvar = 'Jacob'; // Sett det faktiske svaret her
+
+    if (brukerSvar === riktigSvar) {
+        document.getElementById('gjettResultat').textContent = 'Riktig svar!';
+    } else {
+        document.getElementById('gjettResultat').textContent = 'Feil svar. Prøv igjen.';
+    }
+});
