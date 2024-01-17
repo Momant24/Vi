@@ -86,3 +86,17 @@ button {
     cursor: pointer;
 }
   
+
+button {
+    margin: 20px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#spillContainer {
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid black;
+    display: inline-block;
+}
