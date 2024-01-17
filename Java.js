@@ -105,3 +105,52 @@ document.getElementById("visMemorySpillKnapp").addEventListener("click", functio
 document.getElementById("visGjetteSpillKnapp").addEventListener("click", function() {
     document.getElementById("gjetteSpillContainer").style.display = "block";
 });
+document.getElementById("visHigherLowerSpillKnapp").addEventListener("click", function() {
+    document.getElementById("higherLowerSpillContainer").style.display = "block";
+    document.getElementById("naavaerendeTall").textContent = Math.floor(Math.random() * 10) + 1;
+});
+
+document.getElementById("higherButton").addEventListener("click", function() {
+    gjettOmHoyereEllerLavere(true);
+});
+
+document.getElementById("lowerButton").addEventListener("click", function() {
+    gjettOmHoyereEllerLavere(false);
+});
+
+function gjettOmHoyereEllerLavere(gjettHoyere) {
+    const naavaerendeTall = parseInt(document.getElementById("naavaerendeTall").textContent, 10);
+    const nyttTall = Math.floor(Math.random() * 10) + 1;
+    const riktig = (gjettHoyere && nyttTall > naavaerendeTall) || (!gjettHoyere && nyttTall < naavaerendeTall);
+
+    document.getElementById("naavaerendeTall").textContent = nyttTall;
+    document.getElementById("higherLowerResultat").textContent = riktig ? "Riktig!" : "Feil! Nytt tall: " + nyttTall;
+}
+document.getElementById("visRockPaperScissorsKnapp").addEventListener("click", function() {
+    document.getElementById("rockPaperScissorsContainer").style.display = "block";
+});
+
+document.getElementById("rockButton").addEventListener("click", function() {
+    spilleRockPaperScissors("Stein");
+});
+document.getElementById("paperButton").addEventListener("click", function() {
+    spilleRockPaperScissors("Papir");
+});
+document.getElementById("scissorsButton").addEventListener("click", function() {
+    spilleRockPaperScissors("Saks");
+});
+
+function spilleRockPaperScissors(spillerValg) {
+    const valg = ["Stein", "Papir", "Saks"];
+    const datamaskinValg = valg[Math.floor(Math.random() * valg.length)];
+    
+    if (spillerValg === datamaskinValg) {
+        document.getElementById("rockPaperScissorsResultat").textContent = "Uavgjort! Begge valgte " + spillerValg;
+    } else if ((spillerValg === "Stein" && datamaskinValg === "Saks") ||
+               (spillerValg === "Papir" && datamaskinValg === "Stein") ||
+               (spillerValg === "Saks" && datamaskinValg === "Papir")) {
+        document.getElementById("rockPaperScissorsResultat").textContent = "Du vinner! " + spillerValg + " slår " + datamaskinValg;
+    } else {
+        document.getElementById("rockPaperScissorsResultat").textContent = "Du taper! " + datamaskinValg + " slår " + spillerValg;
+    }
+}
