@@ -48,6 +48,18 @@ body {
     z-index: 9999;
 }
 
+.paul_background {
+    background-color: black;
+}
+
+
+.title {
+    color: #4D77FE;
+}
+
+#message {
+    color: white;
+}
 
 .paul {
     font-size: 200px;
@@ -62,6 +74,18 @@ body {
 }
 
 
+.container {
+    text-align: center;
+    padding: 100px;
+}
+  
+button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+  
 
 button {
     margin: 20px;

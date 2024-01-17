@@ -6,12 +6,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="styling.css">
 </head>
-<body>
+<body class="paul_background">
 
     <div class="splash-screen">
         <h1 class="paul">Paul</h1>
     </div>
-
 
     <div class="header">
         <div class="navbar">
@@ -20,8 +19,17 @@
         </div>
     </div>
 
-
-
+    <div class="container">
+        <h1 class="title">Guess the Number</h1>
+        <p id="message">Guess a number between 1 and 10</p>
+        <input type="number" id="guessInput" placeholder="Enter your guess">
+        <button onclick="checkGuess()">Submit Guess</button>
+    </div>
+    
+    <script src="Java.js"></script>
+      
+    
+    
 
 </body>
 </html>
