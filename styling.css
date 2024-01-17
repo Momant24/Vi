@@ -60,3 +60,17 @@ body {
     50% { opacity: 1; } 
     100% { opacity: 0; visibility: hidden; }
 }
+
+
+.container {
+    text-align: center;
+    padding: 100px;
+}
+  
+button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+  
