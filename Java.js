@@ -428,9 +428,9 @@ document.getElementById('visGjettDetSkjulteBildeKnapp').addEventListener('click'
 
 document.getElementById('sjekkGjettKnapp').addEventListener('click', function() {
     const brukerSvar = document.getElementById('gjettInput').value.toLowerCase();
-    const riktigSvar = 'Jacob'; // Sett det faktiske svaret her
+    const gyldigeSvar = ['Jakob', 'Trump', 'Tux'];
 
-    if (brukerSvar === riktigSvar) {
+    if (gyldigeSvar.includes(brukerSvar)) {
         document.getElementById('gjettResultat').textContent = 'Riktig svar!';
     } else {
         document.getElementById('gjettResultat').textContent = 'Feil svar. Prøv igjen.';
