@@ -426,13 +426,16 @@ document.getElementById('visGjettDetSkjulteBildeKnapp').addEventListener('click'
     document.getElementById('gjettDetSkjulteBildeContainer').style.display = 'block';
 });
 
-document.getElementById('sjekkGjettKnapp').addEventListener('click', function() {
-    const brukerSvar = document.getElementById('gjettInput').value.toLowerCase();
-    const gyldigeSvar = ['Jakob', 'Trump', 'Tux'];
+document.getElementById('sjekkGjettKnapp1').addEventListener('click', function() {
+    const brukerSvar1 = document.getElementById('gjettInput1').value.toLowerCase();
 
-    if (gyldigeSvar.includes(brukerSvar)) {
-        document.getElementById('gjettResultat').textContent = 'Riktig svar!';
+    console.log("User input:", brukerSvar1);
+
+    if (brukerSvar1 === "jakob" || brukerSvar1 === "tux" || brukerSvar1 === "trump" ) {
+        document.getElementById('gjettResultat1').textContent = 'Riktig svar!';
     } else {
-        document.getElementById('gjettResultat').textContent = 'Feil svar. Prøv igjen.';
+        document.getElementById('gjettResultat1').textContent = 'Feil svar. Prøv igjen.';
     }
+    
+    
 });
